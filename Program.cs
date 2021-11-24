@@ -10,6 +10,7 @@ namespace LifeGame
             setup();
         }
 
+
         static void setup()
         {
             LifeGame lifeGame = new LifeGame();
@@ -112,7 +113,14 @@ namespace LifeGame
                 {
                     if (GetCellCondition(i, j) ==livingCell)
                     {
-                        trueCount++;
+                        if(i == x && j == y)
+                        {
+                            trueCount += 0;
+                        }
+                        else
+                        {
+                            trueCount++;
+                        }
                     }
                 }
             }
