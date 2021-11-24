@@ -19,13 +19,14 @@ namespace LifeGame
 
     class LifeGame
     {
-        string[,] Cells = new string[16, 16];
 
         const int x = 16;
         const int y = 16;
 
         const string livingCell = "●";
         const string dyingCell = "○";
+
+        string[,] Cells = new string[x, y];
 
         public void Run()
         {
@@ -140,14 +141,14 @@ namespace LifeGame
             return false;
         }
 
-        string GetCellCondition(int x,int y)
+        string GetCellCondition(int xPos,int yPos)
         {
-            if(x >= 16 || y >= 16){ return dyingCell; }
-            if(x < 0 || y < 0)
+            if(xPos >= x || yPos >= y){ return dyingCell; }
+            if(xPos < 0 || yPos < 0)
             {
                 return dyingCell;
             }
-            return Cells[x, y];
+            return Cells[xPos, yPos];
         } 
 
 
