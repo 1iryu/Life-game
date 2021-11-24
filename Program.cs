@@ -21,8 +21,8 @@ namespace LifeGame
     class LifeGame
     {
 
-        const int x = 16;
-        const int y = 16;
+        const int x = 30;
+        const int y = 30;
 
         const string livingCell = "●";
         const string dyingCell = "○";
@@ -69,7 +69,7 @@ namespace LifeGame
 
         string Ask()
         {
-            Console.WriteLine("Type Number you want to generate");
+            Console.WriteLine("Type Count you want to random generate(if count is small,nothing happend)");
             string typeText = Console.ReadLine();
             return typeText;
         }
@@ -79,8 +79,8 @@ namespace LifeGame
             for (int i = 0; i < num; i++)
             {
                 Random r1 = new Random();
-                int num1 = r1.Next(0, 16);
-                int num2 = r1.Next(0, 16);
+                int num1 = r1.Next(0, x);
+                int num2 = r1.Next(0, y);
 
                 SetLivingCells(num1, num2);
             }
