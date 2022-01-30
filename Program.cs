@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 
 namespace LifeGame
@@ -21,13 +21,13 @@ namespace LifeGame
     class LifeGame
     {
 
-        const int x = 30;
-        const int y = 30;
+        const int mapSizeX = 30;
+        const int mapSizeY = 30;
 
-        const string livingCell = "●";
-        const string dyingCell = "○";
+        const string livingCell = "■";
+        const string dyingCell = "□";
 
-        string[,] Cells = new string[x, y];
+        string[,] Cells = new string[mapSizeX, mapSizeY];
 
         public void Run()
         {
@@ -46,9 +46,9 @@ namespace LifeGame
 
         void InitCells()
         {
-            for (int i = 0; i < x; i++)
+            for (int i = 0; i < mapSizeX; i++)
             {
-                for (int j = 0; j < y; j++)
+                for (int j = 0; j < mapSizeY; j++)
                 {
                     Cells[i, j] = dyingCell;
                 }
@@ -59,7 +59,7 @@ namespace LifeGame
         {
             bool result = false;
             int i = 0;
-            while(result == false)
+            while (result == false)
             {
                 string text = Ask();
                 result = int.TryParse(text, out i);
@@ -79,8 +79,8 @@ namespace LifeGame
             for (int i = 0; i < num; i++)
             {
                 Random r1 = new Random();
-                int num1 = r1.Next(0, x);
-                int num2 = r1.Next(0, y);
+                int num1 = r1.Next(0, mapSizeX);
+                int num2 = r1.Next(0, mapSizeY);
 
                 SetLivingCells(num1, num2);
             }
@@ -88,9 +88,9 @@ namespace LifeGame
 
         void CheckAllCell()
         {
-            for (int i = 0; i < x; i++)
+            for (int i = 0; i < mapSizeX; i++)
             {
-                for (int j = 0; j < y; j++)
+                for (int j = 0; j < mapSizeY; j++)
                 {
                     if (SurvivalCheck(i, j))
                     {
@@ -104,16 +104,16 @@ namespace LifeGame
             }
         }
 
-        int CheckNearLivingCells(int x,int y)
+        int CheckNearLivingCells(int x, int y)
         {
             int trueCount = 0;
-            for (int i = x-1; i <= x+1; i++)
+            for (int i = x - 1; i <= x + 1; i++)
             {
-                for (int j = y-1; j <= y+1; j++)
+                for (int j = y - 1; j <= y + 1; j++)
                 {
-                    if (GetCellCondition(i, j) ==livingCell)
+                    if (GetCellCondition(i, j) == livingCell)
                     {
-                        if(i == x && j == y)
+                        if (i == x && j == y)
                         {
                             trueCount += 0;
                         }
@@ -126,11 +126,11 @@ namespace LifeGame
             }
 
             return trueCount;
-        } 
+        }
 
-        bool SurvivalCheck(int x,int y)
+        bool SurvivalCheck(int x, int y)
         {
-            if(GetCellCondition(x,y) == livingCell)
+            if (GetCellCondition(x, y) == livingCell)
             {
                 int livingCellsCount = CheckNearLivingCells(x, y);
                 if (livingCellsCount == 2 || livingCellsCount == 3)
@@ -138,7 +138,7 @@ namespace LifeGame
                     return true;
                 }
             }
-            if(GetCellCondition(x, y) == dyingCell)
+            if (GetCellCondition(x, y) == dyingCell)
             {
                 int livingCellsCount = CheckNearLivingCells(x, y);
                 if (livingCellsCount == 3)
@@ -149,18 +149,15 @@ namespace LifeGame
             return false;
         }
 
-        string GetCellCondition(int xPos,int yPos)
+        string GetCellCondition(int xPos, int yPos)
         {
-            if(xPos >= x || yPos >= y){ return dyingCell; }
-            if(xPos < 0 || yPos < 0)
-            {
-                return dyingCell;
-            }
+            if (xPos >= mapSizeX || yPos >= mapSizeY) { return dyingCell; }
+            if (xPos < 0 || yPos < 0) { return dyingCell; }
             return Cells[xPos, yPos];
-        } 
+        }
 
 
-        void SetLivingCells(int x,int y)
+        void SetLivingCells(int x, int y)
         {
             Cells[x, y] = livingCell;
         }
@@ -175,10 +172,10 @@ namespace LifeGame
             CheckAllCell();
             Thread.Sleep(500);
             Console.Clear();
-            for (int i = 0; i < x; i++)
+            for (int i = 0; i < mapSizeX; i++)
             {
                 Console.WriteLine();
-                for (int j = 0; j < y; j++)
+                for (int j = 0; j < mapSizeY; j++)
                 {
                     Console.Write(Cells[i, j]);
                 }
