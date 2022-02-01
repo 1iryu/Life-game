@@ -7,12 +7,6 @@ namespace LifeGame
     {
         static void Main(string[] args)
         {
-            setup();
-        }
-
-
-        static void setup()
-        {
             LifeGame lifeGame = new LifeGame();
             lifeGame.Run();
         }
@@ -61,17 +55,11 @@ namespace LifeGame
             int i = 0;
             while (result == false)
             {
-                string text = Ask();
-                result = int.TryParse(text, out i);
+                Console.WriteLine("Type Count you want to random generate(if count is small,nothing happend)");
+                string typeText = Console.ReadLine();
+                result = int.TryParse(typeText, out i);
             }
             return i;
-        }
-
-        string Ask()
-        {
-            Console.WriteLine("Type Count you want to random generate(if count is small,nothing happend)");
-            string typeText = Console.ReadLine();
-            return typeText;
         }
 
         void SetLivingCellsWithRandomNum(int num)
